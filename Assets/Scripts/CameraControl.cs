@@ -5,7 +5,9 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
     PlayerControl player;
+    [SerializeField]
     Vector3 offset;
+
     void Start()
     {
         player = FindObjectOfType<PlayerControl>();

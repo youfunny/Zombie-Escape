@@ -8,6 +8,10 @@ public class PlayerControl : MonoBehaviour
     NavMeshAgent navMeshAgent;
     public float speed;
     PlayerCursor cursor;
+    [SerializeField]
+    public float sprintBoost = 1.5f;
+    public bool isBoosted = false;
+
 
     void Start()
     {
@@ -28,7 +32,25 @@ public class PlayerControl : MonoBehaviour
             moveDirection.x = -1.0f;
         if (Input.GetKey(KeyCode.S))
             moveDirection.x = 1.0f;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (!isBoosted)
+            {
+                speed *= sprintBoost;
+                isBoosted = true;
+            }
+        }
+        else
+        {
+            if (isBoosted)
+            {
+                speed /= sprintBoost;
+                isBoosted = false;
+            }
+        }
+
         navMeshAgent.velocity = moveDirection.normalized * speed;
     }
+
 }
 
