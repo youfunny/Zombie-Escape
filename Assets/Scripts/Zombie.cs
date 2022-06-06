@@ -7,20 +7,28 @@ public class Zombie : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;
     public PlayerControl player;
-    public float speed = 5f;
-    //public Player player;
+    public HealthSystem healthSystem;
+    public float speed = 24f;
+    public bool enrageable = false;
+    public bool enraged = false;
+    public float enrageBoost = 1.3f;
+    
+
     void Start()
     {
+        healthSystem = GetComponent<HealthSystem>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        //navMeshAgent.SetDestination(Vector3.zero);
         player = FindObjectOfType<PlayerControl>();
-        
+        navMeshAgent.speed = speed;
     }
 
     void Update()
     {
         navMeshAgent.SetDestination(player.transform.position);
-        navMeshAgent.speed = speed;
-
+        if (enrageable && healthSystem.health < healthSystem.maxHealth && !enraged)
+        {
+            navMeshAgent.speed *= enrageBoost;
+            enraged = true;
+        }
     }
 }

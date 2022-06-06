@@ -10,8 +10,8 @@ public class CameraControl : MonoBehaviour
     private float speedY = 450f;
     public float limitY = 60f;
     public float minDistance = 1.5f;
-    public LayerMask obstacles;
-    public LayerMask noPlayer;
+    //public LayerMask obstacles;
+    //public LayerMask noPlayer;
 
     private float maxDistance;
     private Vector3 localPosition;

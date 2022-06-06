@@ -6,11 +6,22 @@ using UnityEngine.AI;
 public class PlayerControl : MonoBehaviour
 {
     NavMeshAgent navMeshAgent;
-
+    private bool isBoosted = false;
+    public float sprintBoost = 1.35f;
+    //1.50 38
+    [SerializeField]
+    public float energy;
+    [SerializeField]
+    public float maxEnergy = 100f;
+    [SerializeField]
+    public float sprintCooldown = 0;
+    [SerializeField]
+    public float exhaustedTime = 100f;
+    
     void Start()
     {
+        energy = maxEnergy;
         navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.speed = 900;
     }
 
     void Update()
@@ -18,15 +29,35 @@ public class PlayerControl : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector2 direction = new Vector2(horizontal, vertical);
+        if (Input.GetKey(KeyCode.LeftShift) && sprintCooldown == 0)
+        {
+            if (!isBoosted)
+            {
+                navMeshAgent.speed *= sprintBoost;
+                isBoosted = true;
+            }
+            energy = Mathf.Clamp(energy - 13f * Time.deltaTime, 0, maxEnergy);
+            if (energy <= 0)
+                sprintCooldown = 100f;
+        }
+        else
+        {
+            if (isBoosted)
+            {
+                navMeshAgent.speed /= sprintBoost;
+                isBoosted = false;
+            }
+            energy = Mathf.Clamp(energy + 5.5f * Time.deltaTime, 0, maxEnergy);
+        }
 
         if (direction.magnitude <= 0)
         {
             //для анимации
         }
 
-        if (Mathf.Abs(direction.y) > 0.1f)
+        if (Mathf.Abs(direction.y) > 0.01f || Mathf.Abs(direction.x) > 0.01f)
         {
-            Vector3 destination = transform.position + transform.right * direction.x + transform.forward * direction.y;
+            Vector3 destination = transform.position + transform.right * direction.x * 1.01f + transform.forward * direction.y * 1.01f;
             navMeshAgent.destination = destination;
         }
         else 
@@ -35,6 +66,12 @@ public class PlayerControl : MonoBehaviour
             transform.Rotate(0, direction.x * navMeshAgent.angularSpeed * Time.deltaTime, 0);
         }
     }
+
+    private void FixedUpdate()
+    {
+        sprintCooldown = Mathf.Clamp(sprintCooldown - 17f * Time.deltaTime, 0, exhaustedTime);
+    }
+
     //public float speed;
     //PlayerCursor cursor;
     //[SerializeField]
