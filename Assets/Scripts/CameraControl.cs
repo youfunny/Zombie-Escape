@@ -10,8 +10,6 @@ public class CameraControl : MonoBehaviour
     private float speedY = 450f;
     public float limitY = 60f;
     public float minDistance = 1.5f;
-    //public LayerMask obstacles;
-    //public LayerMask noPlayer;
 
     private float maxDistance;
     private Vector3 localPosition;
@@ -38,7 +36,7 @@ public class CameraControl : MonoBehaviour
     void CameraRotation()
     {
         var mx = Input.GetAxis("Mouse X");
-        var my = -Input.GetAxis("Mouse Y");
+        var my = Input.GetAxis("Mouse Y");
 
         if (my != 0)
         {

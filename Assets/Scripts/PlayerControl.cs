@@ -25,10 +25,11 @@ public class PlayerControl : MonoBehaviour
     }
 
     void Update()
-    {
+    { 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector2 direction = new Vector2(horizontal, vertical);
+
         if (Input.GetKey(KeyCode.LeftShift) && sprintCooldown == 0)
         {
             if (!isBoosted)
@@ -50,9 +51,9 @@ public class PlayerControl : MonoBehaviour
             energy = Mathf.Clamp(energy + 5.5f * Time.deltaTime, 0, maxEnergy);
         }
 
-        if (direction.magnitude <= 0)
+        if (direction.magnitude == 0)
         {
-            //для анимации
+          //для анимации   
         }
 
         if (Mathf.Abs(direction.y) > 0.01f || Mathf.Abs(direction.x) > 0.01f)
@@ -60,7 +61,7 @@ public class PlayerControl : MonoBehaviour
             Vector3 destination = transform.position + transform.right * direction.x * 1.01f + transform.forward * direction.y * 1.01f;
             navMeshAgent.destination = destination;
         }
-        else 
+        else
         {
             navMeshAgent.destination = transform.position;
             transform.Rotate(0, direction.x * navMeshAgent.angularSpeed * Time.deltaTime, 0);

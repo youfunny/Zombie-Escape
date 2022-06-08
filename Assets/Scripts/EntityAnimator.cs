@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class EntityAnimator : MonoBehaviour
-{
+{ 
     NavMeshAgent navMeshAgent;
     Animator animator;
 
@@ -12,7 +12,6 @@ public class EntityAnimator : MonoBehaviour
     {
         navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
-
     }
 
     void Update()

@@ -23,13 +23,15 @@ public class ShootingSystem : MonoBehaviour
     public float reloadSpeed = 1f;
     void Start()
     {
-        
+     
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && !reloadingNow)
+        {
             Shoot();
+        }
         if (Input.GetKeyDown(KeyCode.R) && !reloadingNow)
         {
             reloading = reloadTime;
