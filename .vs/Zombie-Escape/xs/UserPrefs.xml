@@ -6,7 +6,7 @@
           <Node name="Zombie-Escape" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="ShootingSystem.cs" selected="True" />
+                <Node name="EntityAnimator.cs" selected="True" />
               </Node>
             </Node>
           </Node>
