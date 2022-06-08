@@ -47,11 +47,11 @@ public class ShootingSystem : MonoBehaviour
         Debug.DrawRay(firePoint.position, firePoint.forward * range, Color.blue, 1.5f);
         if (Physics.Raycast(firePoint.position, firePoint.forward, out RaycastHit hitInfo, range))
         {
-            Debug.Log(hitInfo.transform.name);
+            //Debug.Log(hitInfo.transform.name);
             if (hitInfo.transform.GetComponent<HealthSystem>() != null)
             {
                 HealthSystem healthSystem = hitInfo.transform.GetComponent<HealthSystem>();
-                healthSystem.DealDamage(damage);
+                healthSystem.TakeDamage(damage);
             }
         }
     }

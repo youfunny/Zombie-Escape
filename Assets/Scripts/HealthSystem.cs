@@ -8,7 +8,7 @@ public class HealthSystem : MonoBehaviour
     public float maxHealth = 100f;
     public float armor = 0f;
 
-    public void DealDamage(float damage)
+    public void TakeDamage(float damage)
     {
         damage *= 100 / (100 + armor);
         health -= damage;

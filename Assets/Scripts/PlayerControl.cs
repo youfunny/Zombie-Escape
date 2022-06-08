@@ -17,11 +17,15 @@ public class PlayerControl : MonoBehaviour
     public float sprintCooldown = 0;
     [SerializeField]
     public float exhaustedTime = 100f;
-    
+    public float rotateSpeed;
+    private bool isAiming = false;
+    public float aimingRotateSpeed = 60f;
+
     void Start()
     {
         energy = maxEnergy;
         navMeshAgent = GetComponent<NavMeshAgent>();
+        rotateSpeed = navMeshAgent.angularSpeed;
     }
 
     void Update()
@@ -29,6 +33,22 @@ public class PlayerControl : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector2 direction = new Vector2(horizontal, vertical);
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            if (!isAiming)
+            {
+                navMeshAgent.angularSpeed = aimingRotateSpeed;
+                isAiming = true;
+            }
+        }
+        else
+        {
+            if (isAiming)
+            {
+                navMeshAgent.angularSpeed = rotateSpeed;
+                isAiming = false;
+            }
+        }
 
         if (Input.GetKey(KeyCode.LeftShift) && sprintCooldown == 0)
         {

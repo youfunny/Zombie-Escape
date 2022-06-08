@@ -12,6 +12,8 @@ public class Zombie : MonoBehaviour
     public bool enrageable = false;
     public bool enraged = false;
     public float enrageBoost = 1.3f;
+    public float collisionDamage = 20f;
+    public PlayerHealth playerHealthSystem;
     
 
     void Start()
@@ -19,6 +21,7 @@ public class Zombie : MonoBehaviour
         healthSystem = GetComponent<HealthSystem>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         player = FindObjectOfType<PlayerControl>();
+        playerHealthSystem = player.GetComponent<PlayerHealth>();
         navMeshAgent.speed = speed;
     }
 
@@ -31,4 +34,14 @@ public class Zombie : MonoBehaviour
             enraged = true;
         }
     }
+
+
+    private void OnCollisionStay(Collision collision)
+    {
+        //Debug.Log(collision.transform);
+        //playerHealthSystem = collision.transform.GetComponent<PlayerHealth>();
+        playerHealthSystem.TakeZombieDamage(collisionDamage);
+        
+    }
+
 }
