@@ -11,7 +11,7 @@ public class ShootingSystem : MonoBehaviour
     [SerializeField]
     public int maxAmmo = 12;
     [SerializeField]
-    public float range = 50f;
+    public float range = 200f;
     [SerializeField]
     public float damage = 50f;
     [SerializeField]
@@ -21,6 +21,8 @@ public class ShootingSystem : MonoBehaviour
     public bool reloadingNow = false;
     [SerializeField]
     public float reloadSpeed = 1f;
+    public float flatArmorPenetration = 0f;
+
     void Start()
     {
      
@@ -28,7 +30,7 @@ public class ShootingSystem : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !reloadingNow)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !reloadingNow && ammo > 0)
         {
             Shoot();
         }
@@ -44,21 +46,21 @@ public class ShootingSystem : MonoBehaviour
     void Shoot()
     {
         ammo--;
-        Debug.DrawRay(firePoint.position, firePoint.forward * range, Color.blue, 1.5f);
+        Debug.DrawRay(firePoint.position, firePoint.forward * range, Color.red, 0.1f);
         if (Physics.Raycast(firePoint.position, firePoint.forward, out RaycastHit hitInfo, range))
         {
-            Debug.Log(hitInfo.transform.name);
+            //Debug.Log(hitInfo.transform.name);
             if (hitInfo.transform.GetComponent<HealthSystem>() != null)
             {
                 HealthSystem healthSystem = hitInfo.transform.GetComponent<HealthSystem>();
-                healthSystem.DealDamage(damage);
+                healthSystem.TakeDamage(damage, flatArmorPenetration);
             }
         }
     }
 
     void ReloadUpdate()
     {
-        reloading = Mathf.Clamp(reloading - 50f * Time.deltaTime * reloadSpeed, 0, reloadTime);
+        reloading = Mathf.Clamp(reloading - 55f * Time.deltaTime * reloadSpeed, 0, reloadTime);
         if (reloading == 0)
         {
             reloadingNow = false;
