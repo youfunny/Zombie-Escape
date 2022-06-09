@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
-
     Resolution[] resolutions; 
     public TMPro.TMP_Dropdown resolutionDropdown;
 
