@@ -21,6 +21,9 @@ public class Zombie : MonoBehaviour
     public float enrageBoostPerLvl = 0.01f;
     public float collisionDamagePerLvl = 1f;
     public float healthPerLvl = 1f;
+    public float armorPerLvl = 4f;
+    public float flatArmorPenetration = 0f;
+    public float flatArmorPenPerLvl = 0f;
 
     void Start()
     {
@@ -49,7 +52,7 @@ public class Zombie : MonoBehaviour
         //Debug.Log(collision.transform);
         //playerHealthSystem = collision.transform.GetComponent<PlayerHealth>();
         if (collision.transform.tag.Equals("Player"))
-            playerHealthSystem.TakeZombieDamage(collisionDamage);
+            playerHealthSystem.TakeZombieDamage(collisionDamage, flatArmorPenetration);
         
     }
 
@@ -61,6 +64,7 @@ public class Zombie : MonoBehaviour
         collisionDamage += collisionDamagePerLvl * lvl;
         healthSystem.maxHealth += healthPerLvl * lvl;
         healthSystem.health = healthSystem.maxHealth;
+        healthSystem.armor += armorPerLvl * lvl;
     }
 
 }

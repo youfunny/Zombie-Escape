@@ -15,9 +15,9 @@ public class HealthSystem : MonoBehaviour
         levelDifficulty = FindObjectOfType<LevelDifficulty>();
         zombie = GetComponent<Zombie>();
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, float flatArmorPenetration)
     {
-        damage *= 100 / (100 + armor);
+        damage *= 100 / (100 + armor - flatArmorPenetration);
         health -= damage;
         CheckHealth();
     }

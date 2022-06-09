@@ -7,7 +7,8 @@ public class PlayerControl : MonoBehaviour
 {
     NavMeshAgent navMeshAgent;
     private bool isBoosted = false;
-    public float sprintBoost = 1.35f;
+    public float sprintBoost = 1.5f;
+    public float speed = 38f;
     //1.50 38
     [SerializeField]
     public float energy;
@@ -20,6 +21,8 @@ public class PlayerControl : MonoBehaviour
     public float rotateSpeed;
     private bool isAiming = false;
     public float aimingRotateSpeed = 60f;
+    public float energyRecoveryMulti = 1f;
+    public float energyUsageMulti = 1f;
 
     void Start()
     {
@@ -27,11 +30,13 @@ public class PlayerControl : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         rotateSpeed = navMeshAgent.angularSpeed;
         Cursor.visible = false;
+        navMeshAgent.speed = speed;
     }
 
     void Update()
-    { 
-        if (Input.GetKey(KeyCode.K))
+    {
+        navMeshAgent.speed = speed;
+        if (Input.GetKeyDown(KeyCode.K))
         {
             Cursor.visible = !Cursor.visible;
         }
@@ -60,20 +65,22 @@ public class PlayerControl : MonoBehaviour
             if (!isBoosted)
             {
                 navMeshAgent.speed *= sprintBoost;
+                speed = navMeshAgent.speed;
                 isBoosted = true;
             }
-            energy = Mathf.Clamp(energy - 13f * Time.deltaTime, 0, maxEnergy);
+            energy = Mathf.Clamp(energy - 13f * Time.deltaTime * energyUsageMulti, 0, maxEnergy);
             if (energy <= 0)
-                sprintCooldown = 100f;
+                sprintCooldown = exhaustedTime;
         }
         else
         {
             if (isBoosted)
             {
                 navMeshAgent.speed /= sprintBoost;
+                speed = navMeshAgent.speed;
                 isBoosted = false;
             }
-            energy = Mathf.Clamp(energy + 5.5f * Time.deltaTime, 0, maxEnergy);
+            energy = Mathf.Clamp(energy + 5.5f * Time.deltaTime * energyRecoveryMulti, 0, maxEnergy);
         }
 
         if (direction.magnitude == 0)
@@ -83,13 +90,15 @@ public class PlayerControl : MonoBehaviour
 
         if (Mathf.Abs(direction.y) > 0.01f || Mathf.Abs(direction.x) > 0.01f)
         {
+            navMeshAgent.isStopped = false;
             Vector3 destination = transform.position + transform.right * direction.x * 1.01f + transform.forward * direction.y * 1.01f;
             navMeshAgent.destination = destination;
         }
         else
         {
-            navMeshAgent.destination = transform.position;
-            transform.Rotate(0, direction.x * navMeshAgent.angularSpeed * Time.deltaTime, 0);
+            //navMeshAgent.destination = transform.position;
+            navMeshAgent.isStopped = true;
+            //transform.Rotate(0, direction.x * navMeshAgent.angularSpeed * Time.deltaTime, 0);
         }
     }
 

@@ -8,17 +8,18 @@ public class PlayerHealth : HealthSystem
     public float currentInvicTime = 0f;
     public bool isInvincible = false;
     public double FlooredHealth;
+    public float healthRegeneration = 1f;
 
     private void Awake()
     {
         currentInvicTime = 12f;
         isInvincible = true;
     }
-    public void TakeZombieDamage(float amount)
+    public void TakeZombieDamage(float amount, float flatArmorPenetration)
     {
         if (!isInvincible)
         {
-            TakeDamage(amount);
+            TakeDamage(amount, flatArmorPenetration);
             isInvincible = true;
             currentInvicTime = invicibilityTime;
         }
@@ -32,7 +33,7 @@ public class PlayerHealth : HealthSystem
             if (currentInvicTime <= 0f)
                 isInvincible = false;
         }
-        health = Mathf.Clamp(health + Time.deltaTime * 0.25f, 0, maxHealth);
+        health = Mathf.Clamp(health + Time.deltaTime * 0.25f * healthRegeneration, 0, maxHealth);
         FlooredHealth = Mathf.Floor(health);
     }
 }

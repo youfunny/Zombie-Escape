@@ -21,6 +21,8 @@ public class ShootingSystem : MonoBehaviour
     public bool reloadingNow = false;
     [SerializeField]
     public float reloadSpeed = 1f;
+    public float flatArmorPenetration = 0f;
+
     void Start()
     {
      
@@ -28,7 +30,7 @@ public class ShootingSystem : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !reloadingNow)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !reloadingNow && ammo > 0)
         {
             Shoot();
         }
@@ -51,14 +53,14 @@ public class ShootingSystem : MonoBehaviour
             if (hitInfo.transform.GetComponent<HealthSystem>() != null)
             {
                 HealthSystem healthSystem = hitInfo.transform.GetComponent<HealthSystem>();
-                healthSystem.TakeDamage(damage);
+                healthSystem.TakeDamage(damage, flatArmorPenetration);
             }
         }
     }
 
     void ReloadUpdate()
     {
-        reloading = Mathf.Clamp(reloading - 50f * Time.deltaTime * reloadSpeed, 0, reloadTime);
+        reloading = Mathf.Clamp(reloading - 55f * Time.deltaTime * reloadSpeed, 0, reloadTime);
         if (reloading == 0)
         {
             reloadingNow = false;
