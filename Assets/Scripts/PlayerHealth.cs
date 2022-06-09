@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerHealth : HealthSystem
 {
-    public float invicibilityTime = 8f;
+    public float invicibilityTime = 7f;
     public float currentInvicTime = 0f;
     public bool isInvincible = false;
+    public double FlooredHealth;
 
     private void Awake()
     {
@@ -31,5 +32,7 @@ public class PlayerHealth : HealthSystem
             if (currentInvicTime <= 0f)
                 isInvincible = false;
         }
+        health = Mathf.Clamp(health + Time.deltaTime * 0.25f, 0, maxHealth);
+        FlooredHealth = Mathf.Floor(health);
     }
 }

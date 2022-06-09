@@ -26,10 +26,15 @@ public class PlayerControl : MonoBehaviour
         energy = maxEnergy;
         navMeshAgent = GetComponent<NavMeshAgent>();
         rotateSpeed = navMeshAgent.angularSpeed;
+        Cursor.visible = false;
     }
 
     void Update()
     { 
+        if (Input.GetKey(KeyCode.K))
+        {
+            Cursor.visible = !Cursor.visible;
+        }
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector2 direction = new Vector2(horizontal, vertical);

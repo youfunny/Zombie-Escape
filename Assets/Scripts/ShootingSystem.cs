@@ -11,7 +11,7 @@ public class ShootingSystem : MonoBehaviour
     [SerializeField]
     public int maxAmmo = 12;
     [SerializeField]
-    public float range = 50f;
+    public float range = 200f;
     [SerializeField]
     public float damage = 50f;
     [SerializeField]
@@ -44,7 +44,7 @@ public class ShootingSystem : MonoBehaviour
     void Shoot()
     {
         ammo--;
-        Debug.DrawRay(firePoint.position, firePoint.forward * range, Color.blue, 1.5f);
+        Debug.DrawRay(firePoint.position, firePoint.forward * range, Color.red, 0.1f);
         if (Physics.Raycast(firePoint.position, firePoint.forward, out RaycastHit hitInfo, range))
         {
             //Debug.Log(hitInfo.transform.name);

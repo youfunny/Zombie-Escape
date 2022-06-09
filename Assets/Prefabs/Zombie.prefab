@@ -92,8 +92,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5047877477210206924}
   m_LocalRotation: {x: 0, y: -0.92387956, z: 0, w: 0.38268343}
-  m_LocalPosition: {x: 189.05544, y: 0.35000038, z: -116.667366}
-  m_LocalScale: {x: 10.235256, y: 10.235256, z: 10.235256}
+  m_LocalPosition: {x: 189.05, y: 0.17817, z: -116.67}
+  m_LocalScale: {x: 10.439961, y: 10.439961, z: 10.439961}
   m_Children:
   - {fileID: 5047877477209779976}
   - {fileID: 5047877477209778606}
@@ -162,6 +162,13 @@ MonoBehaviour:
   enrageBoost: 1.3
   collisionDamage: 20
   playerHealthSystem: {fileID: 0}
+  scoreOnKilled: 10
+  difficultyOnKill: 0
+  levelDifficulty: {fileID: 0}
+  speedPerLvl: 1
+  enrageBoostPerLvl: 0.01
+  collisionDamagePerLvl: 1
+  healthPerLvl: 3
 --- !u!136 &5047877477210206923
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -203,6 +210,8 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   armor: 0
+  levelDifficulty: {fileID: 0}
+  zombie: {fileID: 0}
 --- !u!54 &5047877477210206919
 Rigidbody:
   m_ObjectHideFlags: 0
