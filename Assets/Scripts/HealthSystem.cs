@@ -9,6 +9,7 @@ public class HealthSystem : MonoBehaviour
     public float armor = 0f;
     public LevelDifficulty levelDifficulty;
     public Zombie zombie;
+    public GameOverScreen gameOverScreen;
 
     private void Start()
     {
@@ -26,13 +27,16 @@ public class HealthSystem : MonoBehaviour
     {
         if (health <= 0f)
         {
-            Destroy(gameObject);
+            if (gameObject.tag.Equals("Player"))
+            {
+                gameOverScreen.LoadGameOverScene();
+            }
             if (gameObject.tag.Equals("Zombie"))
             {
                 levelDifficulty.ZombiesAlive--;
                 levelDifficulty.score += zombie.scoreOnKilled;
                 levelDifficulty.scaledDifficulty += zombie.difficultyOnKill;
             }
-        }
+        } 
     }
 }
