@@ -582,7 +582,7 @@ ScriptsOnlyBuild:
     className: ContentSizeFitter
   - hash:
       serializedVersion: 2
-      Hash: 541a7cdcbce6645c4d4bcbe3253ba1db
+      Hash: 5bb3a56ef52355353f6f1d945e71a060
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GamePassedScreen

@@ -22,6 +22,7 @@ public class LevelDifficulty : MonoBehaviour
     {
         if (score >= 1000 && isInfiniteMode == false) 
         {
+            score = 0;
             gamePassedScreen.LoadGamePassedScene();
         }
         difficultyLevel = Convert.ToInt32(Math.Floor(scaledDifficulty / 0.15f));

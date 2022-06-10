@@ -8,12 +8,14 @@ public class GamePassedScreen : MonoBehaviour
 {
     public GameObject gamePassedUI;
     public GameObject gameUI;
+    public PauseMenu pauseMenu;
     
     public static GamePassedScreen Instance {get; set;}
 
     void Start()
     {
-        gamePassedUI.SetActive(false);    
+        gamePassedUI.SetActive(false);
+        pauseMenu = FindObjectOfType<PauseMenu>();
     }
     
     private void Awake()
