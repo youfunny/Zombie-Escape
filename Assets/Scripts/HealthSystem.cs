@@ -36,6 +36,7 @@ public class HealthSystem : MonoBehaviour
                 levelDifficulty.ZombiesAlive--;
                 levelDifficulty.score += zombie.scoreOnKilled;
                 levelDifficulty.scaledDifficulty += zombie.difficultyOnKill;
+                Destroy(gameObject);
             }
         } 
     }

@@ -35,7 +35,7 @@ public class GamePassedScreen : MonoBehaviour
         gamePassedUI.SetActive(false);
         Time.timeScale = 1f;  
         Cursor.visible = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);    
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void GoToMenu()

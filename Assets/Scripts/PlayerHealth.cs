@@ -7,7 +7,7 @@ public class PlayerHealth : HealthSystem
     public float invicibilityTime = 7f;
     public float currentInvicTime = 0f;
     public bool isInvincible = false;
-    public double FlooredHealth;
+    public float FlooredHealth;
     public float healthRegeneration = 1f;
     public HealthBar healthBar;
 
@@ -40,5 +40,6 @@ public class PlayerHealth : HealthSystem
         healthBar.UpdateHealth(health);
         healthBar.UpdateMaxHealth(maxHealth);
         FlooredHealth = Mathf.Floor(health);
+        healthBar.healthMaxValue.text = FlooredHealth.ToString();
     }
 }
