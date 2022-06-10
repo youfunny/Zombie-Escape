@@ -32,7 +32,7 @@ public class PlayerHealth : HealthSystem
     {
         if (isInvincible)
         {
-            currentInvicTime = Mathf.Clamp(currentInvicTime - 3f * Time.deltaTime, 0, 100f);
+            currentInvicTime = Mathf.Clamp(currentInvicTime - 3f * Time.deltaTime, 0, invicibilityTime);
             if (currentInvicTime <= 0f)
                 isInvincible = false;
         }

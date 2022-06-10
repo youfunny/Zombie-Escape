@@ -32,8 +32,8 @@ public class ZombieSpawner : MonoBehaviour
         {
             Instantiate(zombie, gameObject.transform.position, Quaternion.identity);
             levelDifficulty.ZombiesAlive++;
-            currentCooldown = Mathf.Clamp(maxSpawnCooldown - levelDifficulty.difficultyLevel * 6f + levelDifficulty.ZombiesAlive * 0.15f -
-                              Mathf.Sqrt(range - 125f), 15f, maxSpawnCooldown);
+            currentCooldown = Mathf.Clamp(maxSpawnCooldown - levelDifficulty.difficultyLevel * 2f + levelDifficulty.ZombiesAlive * 0.2f -
+                              Mathf.Sqrt(range - 125f), 15f - levelDifficulty.difficultyLevel * 0.1f, maxSpawnCooldown);
         }
         else
         {

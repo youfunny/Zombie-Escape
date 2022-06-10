@@ -32,8 +32,8 @@ public class Zombie : MonoBehaviour
         player = FindObjectOfType<PlayerControl>();
         levelDifficulty = FindObjectOfType<LevelDifficulty>();
         playerHealthSystem = player.GetComponent<PlayerHealth>();
-        navMeshAgent.speed = speed;
         ScaleStats();
+        navMeshAgent.speed = speed;
     }
 
     void Update()

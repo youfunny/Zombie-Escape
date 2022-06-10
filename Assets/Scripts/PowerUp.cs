@@ -6,10 +6,10 @@ public class PowerUp : MonoBehaviour
 {
     public enum PowerType 
     {
-        Damage,        //+����, ������, �������� ����������� � �������
-        Health,        //+���� �� � �����. ��������� ����������� ��. +invicibility time
-        Speed,         //+�������� ������ � ����. +������������ -������ ����
-        Penetrating    //+����� � +����� ��������
+        Damage,
+        Health,
+        Speed,
+        Penetrating
     }
     public PowerType powerType;
     public ShootingSystem playerShootingSystem;
@@ -42,7 +42,8 @@ public class PowerUp : MonoBehaviour
             else if (powerType == PowerType.Health)
             {
                 playerHealthSystem.maxHealth += 10f;
-                playerHealthSystem.health = Mathf.Clamp(playerHealthSystem.health + 25f, 0, playerHealthSystem.maxHealth);
+                playerHealthSystem.health = Mathf.Clamp(playerHealthSystem.health + playerHealthSystem.maxHealth * 0.25f,
+                                                        0, playerHealthSystem.maxHealth);
                 playerHealthSystem.healthRegeneration += 0.1f;
                 playerHealthSystem.invicibilityTime += 0.4f;
             }
@@ -65,41 +66,4 @@ public class PowerUp : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    //private void OnCollisionStay(Collision collision)
-    //{
-    //    if (collision.transform.tag.Equals("Player"))
-    //    {
-    //        if (powerType == PowerType.Damage)
-    //        {
-    //            playerShootingSystem.maxAmmo++;
-    //            playerShootingSystem.range += 25f;
-    //            playerShootingSystem.damage += 2;
-    //            playerShootingSystem.reloadSpeed += 0.06f;
-    //        }
-    //        else if (powerType == PowerType.Health)
-    //        {
-    //            playerHealthSystem.maxHealth += 10f;
-    //            playerHealthSystem.health = Mathf.Clamp(playerHealthSystem.health + 25f, 0, playerHealthSystem.maxHealth);
-    //            playerHealthSystem.healthRegeneration += 1.07f;
-    //            playerHealthSystem.invicibilityTime += 0.4f;
-    //        }
-    //        else if (powerType == PowerType.Speed)
-    //        {
-    //            playerControl.speed += 1.5f;
-    //            playerControl.sprintBoost += 0.04f;
-    //            playerControl.energyRecoveryMulti += 0.02f;
-    //            playerControl.energyUsageMulti -= 0.02f;
-    //            playerControl.exhaustedTime = Mathf.Clamp(playerControl.exhaustedTime - 5f, 0, 1000f);
-    //        }
-    //        else if (powerType == PowerType.Penetrating)
-    //        {
-    //            playerHealthSystem.armor += 6f;
-    //            playerShootingSystem.flatArmorPenetration += 6f;
-    //        }
-    //        else
-    //            return;
-    //        Destroy(gameObject);
-    //    }
-    //}
 }
