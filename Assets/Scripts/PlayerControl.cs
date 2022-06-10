@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
 public class PlayerControl : MonoBehaviour
 {
     NavMeshAgent navMeshAgent;
@@ -19,7 +18,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     public float exhaustedTime = 100f;
     public float rotateSpeed;
-    private bool isAiming = false;
+    public bool isAiming = false;
     public float aimingRotateSpeed = 60f;
     public float energyRecoveryMulti = 1f;
     public float energyUsageMulti = 1f;
@@ -106,49 +105,5 @@ public class PlayerControl : MonoBehaviour
     {
         sprintCooldown = Mathf.Clamp(sprintCooldown - 17f * Time.deltaTime, 0, exhaustedTime);
     }
-
-    //public float speed;
-    //PlayerCursor cursor;
-    //[SerializeField]
-    //public float sprintBoost = 1.5f;
-    //public bool isBoosted = false;
-
-
-    //void Start()
-    //{
-    //    navMeshAgent = GetComponent<NavMeshAgent>();
-    //    cursor = FindObjectOfType<PlayerCursor>();
-    //    navMeshAgent.updateRotation = false;
-    //}
-    //void Update()
-    //{
-    //    Vector3 forward = cursor.transform.position - transform.position;
-    //    transform.rotation = Quaternion.LookRotation(new Vector3(forward.x, 0, forward.z));
-    //    Vector3 moveDirection = Vector3.zero;
-    //    if (Input.GetKey(KeyCode.A))
-    //        moveDirection.z = -1.0f;
-    //    if (Input.GetKey(KeyCode.D))
-    //        moveDirection.z = 1.0f;
-    //    if (Input.GetKey(KeyCode.W))
-    //        moveDirection.x = -1.0f;
-    //    if (Input.GetKey(KeyCode.S))
-    //        moveDirection.x = 1.0f;
-    //    if (Input.GetKey(KeyCode.LeftShift))
-    //    {
-    //        if (!isBoosted)
-    //        {
-    //            speed *= sprintBoost;
-    //            isBoosted = true;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        if (isBoosted)
-    //        {
-    //            speed /= sprintBoost;
-    //            isBoosted = false;
-    //        }
-    //    }
-    //}
 }
 
